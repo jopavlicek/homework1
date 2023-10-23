@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
+import com.ramcosta.composedestinations.DestinationsNavHost
+import cz.mendelu.pef.petstore.ui.screens.listofpets.NavGraphs
 import cz.mendelu.pef.petstore.ui.theme.PetStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PetStoreTheme {
-                Text(text = "Hello")
+                DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }
     }

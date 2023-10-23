@@ -1,6 +1,6 @@
 package cz.mendelu.pef.petstore.architecture
 
-sealed class CommunicationResult<T: Any> {
+sealed class CommunicationResult<out T: Any> {
     class Success<T: Any>(val data: T) : CommunicationResult<T>()
     class Error(val error: cz.mendelu.pef.petstore.architecture.Error)
         : CommunicationResult<Nothing>()
