@@ -22,7 +22,10 @@ class PetDetailViewModel @Inject constructor(
     ) : BaseViewModel()
 {
     val petsUIState: MutableState<UiState<Pet, PetDetailErrors>>
-            = mutableStateOf(UiState())
+        = mutableStateOf(UiState())
+
+    val isInitialized: MutableState<Boolean> = mutableStateOf(false)
+    val deleteResult: MutableState<Boolean?> = mutableStateOf(null)
 
     fun loadPet(id: Long) {
         launch {
@@ -61,6 +64,46 @@ class PetDetailViewModel @Inject constructor(
                         data = result.data,
                         errors = null
                     )
+            }
+        }
+    }
+
+    fun deletePet(id: Long) {
+        launch {
+            petsUIState.value = UiState()
+
+            val result = withContext(Dispatchers.IO) {
+                petsRemoteRepositoryImpl.deletePet(id)
+            }
+
+            when (result) {
+                is CommunicationResult.CommunicationError ->
+                    petsUIState.value = UiState(
+                        loading = false,
+                        data = null,
+                        errors = PetDetailErrors(
+                            communicationError = R.string.no_internet_connection
+                        )
+                    )
+                is CommunicationResult.Error ->
+                    deleteResult.value = false
+//                    petsUIState.value = UiState(
+//                        loading = false,
+//                        data = null,
+//                        errors = PetDetailErrors(
+//                            communicationError = R.string.failed_to_delete_pet
+//                        )
+//                    )
+                is CommunicationResult.Exception ->
+                    petsUIState.value = UiState(
+                        loading = false,
+                        data = null,
+                        errors = PetDetailErrors(
+                            communicationError = R.string.unknown_error
+                        )
+                    )
+                is CommunicationResult.Success ->
+                    deleteResult.value = true
             }
         }
     }

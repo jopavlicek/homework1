@@ -1,5 +1,6 @@
 package cz.mendelu.pef.petstore.communication.pets
 
+import cz.mendelu.pef.petstore.model.ApiResponse
 import cz.mendelu.pef.petstore.model.Pet
 import retrofit2.Response
 import retrofit2.http.DELETE
@@ -14,5 +15,8 @@ interface PetsAPI {
 
     @GET("pet/{id}")
     suspend fun findById(@Path("id") id: Long): Response<Pet>
+
+    @DELETE("pet/{id}")
+    suspend fun deletePet(@Path("id") id: Long): Response<ApiResponse>
 
 }

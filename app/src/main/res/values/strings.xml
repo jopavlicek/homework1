@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Pet Store</string>
-    <string name="failed_to_load_the_list">Failed to load the list</string>
-    <string name="failed_to_load_pet_details">Failed to load pet details</string>
+    <string name="failed_to_load_the_list">Failed to load the pet list</string>
+    <string name="failed_to_load_pet_details">Failed to load this pet</string>
+    <string name="failed_to_delete_pet">Failed to delete this pet</string>
     <string name="no_available_pets">There are no available pets at the moment</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="pet_delete_ok">Successfully deleted pet</string>
+    <string name="pet_delete_fail">Error with deleting pet</string>
     <string name="unknown_error">Unknown error</string>
     <string name="back">Back</string>
     <string name="login_failed">Login Failed</string>

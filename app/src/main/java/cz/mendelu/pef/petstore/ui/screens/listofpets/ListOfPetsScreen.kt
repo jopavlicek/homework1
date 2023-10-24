@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.result.NavResult
+import com.ramcosta.composedestinations.result.ResultRecipient
 import cz.mendelu.pef.petstore.R
 import cz.mendelu.pef.petstore.model.Pet
 import cz.mendelu.pef.petstore.model.UiState
@@ -40,7 +42,8 @@ import cz.mendelu.pef.petstore.ui.theme.halfMargin
 @Destination(start = true)
 @Composable
 fun ListOfPetsScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    petDetailRecipient: ResultRecipient<PetDetailScreenDestination, Boolean>,
 ) {
     val viewModel = hiltViewModel<ListOfPetsViewModel>()
     val uiState: MutableState<UiState<List<Pet>,ListOfPetsErrors>>
@@ -48,6 +51,18 @@ fun ListOfPetsScreen(
 
     viewModel.petsUIState.value.let {
         uiState.value = it
+    }
+
+    // refresh pet list after delete action on pet detail screen
+    petDetailRecipient.onNavResult { result ->
+        when (result) {
+            is NavResult.Canceled -> {}
+            is NavResult.Value -> {
+                if (result.value) {
+                    viewModel.refreshList()
+                }
+            }
+        }
     }
 
     BaseScreen(
