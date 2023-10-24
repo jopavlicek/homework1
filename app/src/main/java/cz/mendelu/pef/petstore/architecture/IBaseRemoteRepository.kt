@@ -12,19 +12,22 @@ interface IBaseRemoteRepository {
     fun <T: Any> processResponse(response: Response<T>): CommunicationResult<T> {
         try {
             if (response.isSuccessful) {
-                if (response.body() != null){
-                    // vse je ok
+                if (response.body() != null) {
                     return CommunicationResult.Success(response.body()!!)
                 } else {
                     return CommunicationResult.Error(
-                        cz.mendelu.pef.petstore.architecture.Error(response.code(),
-                            response.errorBody().toString())
+                        cz.mendelu.pef.petstore.architecture.Error(
+                            response.code(),
+                            response.errorBody().toString()
+                        )
                     )
                 }
             } else {
                 return CommunicationResult.Error(
-                    cz.mendelu.pef.petstore.architecture.Error(response.code(),
-                        response.errorBody().toString())
+                    cz.mendelu.pef.petstore.architecture.Error(
+                        response.code(),
+                        response.errorBody().toString()
+                    )
                 )
             }
         } catch (ex: UnknownHostException){

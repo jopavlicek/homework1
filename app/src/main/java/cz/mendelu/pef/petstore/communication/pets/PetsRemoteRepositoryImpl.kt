@@ -18,4 +18,12 @@ class PetsRemoteRepositoryImpl
         )
     }
 
+    override suspend fun findById(id: Long): CommunicationResult<Pet> {
+        return processResponse(
+            withContext(Dispatchers.IO) {
+                petsAPI.findById(id)
+            }
+        )
+    }
+
 }

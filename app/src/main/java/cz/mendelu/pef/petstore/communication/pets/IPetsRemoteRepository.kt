@@ -8,4 +8,5 @@ import retrofit2.http.Query
 
 interface IPetsRemoteRepository: IBaseRemoteRepository {
     suspend fun findByStatus(status: String): CommunicationResult<List<Pet>>
+    suspend fun findById(id: Long): CommunicationResult<Pet>
 }

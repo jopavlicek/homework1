@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Pet Store</string>
     <string name="failed_to_load_the_list">Failed to load the list</string>
+    <string name="failed_to_load_pet_details">Failed to load pet details</string>
+    <string name="no_available_pets">There are no available pets at the moment</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="unknown_error">Unknown error</string>
     <string name="back">Back</string>
