@@ -87,12 +87,11 @@ fun TextInputField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(0.dp, 0.dp, 0.dp, 0.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = Blue,
-            focusedBorderColor = if (!errorMessage.isNullOrEmpty()) Red else Blue,
-            unfocusedBorderColor = if (!errorMessage.isNullOrEmpty()) Red else Gray,
-            focusedLabelColor = if (!errorMessage.isNullOrEmpty()) Red else Gray,
-        ),
+//        colors = TextFieldDefaults.outlinedTextFieldColors(
+//            focusedBorderColor = if (!errorMessage.isNullOrEmpty()) Red else Blue,
+//            unfocusedBorderColor = if (!errorMessage.isNullOrEmpty()) Red else Gray,
+//            focusedLabelColor = if (!errorMessage.isNullOrEmpty()) Red else Gray,
+//        ),
         )
 
     Text(

@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -35,6 +37,7 @@ import cz.mendelu.pef.petstore.model.UiState
 import cz.mendelu.pef.petstore.ui.elements.BaseScreen
 import cz.mendelu.pef.petstore.ui.elements.PlaceHolderScreen
 import cz.mendelu.pef.petstore.ui.elements.PlaceholderScreenContent
+import cz.mendelu.pef.petstore.ui.screens.destinations.NewPetScreenDestination
 import cz.mendelu.pef.petstore.ui.screens.destinations.PetDetailScreenDestination
 import cz.mendelu.pef.petstore.ui.theme.basicMargin
 import cz.mendelu.pef.petstore.ui.theme.halfMargin
@@ -44,6 +47,7 @@ import cz.mendelu.pef.petstore.ui.theme.halfMargin
 fun ListOfPetsScreen(
     navigator: DestinationsNavigator,
     petDetailRecipient: ResultRecipient<PetDetailScreenDestination, Boolean>,
+    newPetRecipient: ResultRecipient<NewPetScreenDestination, Boolean>,
 ) {
     val viewModel = hiltViewModel<ListOfPetsViewModel>()
     val uiState: MutableState<UiState<List<Pet>,ListOfPetsErrors>>
@@ -53,8 +57,20 @@ fun ListOfPetsScreen(
         uiState.value = it
     }
 
-    // refresh pet list after delete action on pet detail screen
+    // refresh list after delete action on pet detail screen
     petDetailRecipient.onNavResult { result ->
+        when (result) {
+            is NavResult.Canceled -> {}
+            is NavResult.Value -> {
+                if (result.value) {
+                    viewModel.refreshList()
+                }
+            }
+        }
+    }
+
+    // refresh list after create action on new pet screen
+    newPetRecipient.onNavResult { result ->
         when (result) {
             is NavResult.Canceled -> {}
             is NavResult.Value -> {
@@ -69,6 +85,13 @@ fun ListOfPetsScreen(
         topBarText = "List of pets",
         drawFullScreenContent = true,
         showLoading = uiState.value.loading,
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                navigator.navigate(NewPetScreenDestination)
+            }) {
+                Icon(Icons.Filled.Add, null)
+            }
+        },
         actions = {
             IconButton(
                 enabled = !uiState.value.loading,

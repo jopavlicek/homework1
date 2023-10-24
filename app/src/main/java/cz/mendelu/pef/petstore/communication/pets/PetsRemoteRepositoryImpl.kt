@@ -35,4 +35,12 @@ class PetsRemoteRepositoryImpl
         )
     }
 
+    override suspend fun createPet(pet: Pet): CommunicationResult<Pet> {
+        return processResponse(
+            withContext(Dispatchers.IO) {
+                petsAPI.createPet(pet)
+            }
+        )
+    }
+
 }

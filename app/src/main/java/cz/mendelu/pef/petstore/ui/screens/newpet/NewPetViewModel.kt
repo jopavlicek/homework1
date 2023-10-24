@@ -1,14 +1,16 @@
-package cz.mendelu.pef.petstore.ui.screens.listofpets
+package cz.mendelu.pef.petstore.ui.screens.newpet
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import cz.mendelu.pef.petstore.R
 import cz.mendelu.pef.petstore.architecture.BaseViewModel
 import cz.mendelu.pef.petstore.architecture.CommunicationResult
 import cz.mendelu.pef.petstore.communication.pets.PetsRemoteRepositoryImpl
+import cz.mendelu.pef.petstore.model.Category
 import cz.mendelu.pef.petstore.model.Pet
 import cz.mendelu.pef.petstore.model.UiState
+import cz.mendelu.pef.petstore.ui.screens.petdetail.PetDetailErrors
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,26 +18,30 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class ListOfPetsViewModel @Inject constructor(
-    private val petsRemoteRepositoryImpl: PetsRemoteRepositoryImpl,
+class NewPetViewModel @Inject constructor(
+    private val petsRemoteRepositoryImpl: PetsRemoteRepositoryImpl
 ) : BaseViewModel()
 {
-    init {
-        loadPets()
-    }
 
-    val petsUIState: MutableState<UiState<List<Pet>, ListOfPetsErrors>>
-            = mutableStateOf(UiState())
+    val petsUIState: MutableState<UiState<Nothing, NewPetErrors>> = mutableStateOf(UiState(loading = false))
 
-    fun refreshList() {
-        petsUIState.value = UiState()
-        loadPets()
-    }
+    val createResult: MutableState<Boolean?> = mutableStateOf(null)
 
-    private fun loadPets() {
+    fun createPet(name: String) {
         launch {
+            petsUIState.value = UiState()
+
+            val newPet = Pet(
+                id = null,
+                name = name,
+                status = "available",
+                category = null,
+                photoUrls = null,
+                tags = null,
+            )
+
             val result = withContext(Dispatchers.IO) {
-                petsRemoteRepositoryImpl.findByStatus("available")
+                petsRemoteRepositoryImpl.createPet(newPet)
             }
 
             when (result) {
@@ -43,33 +49,31 @@ class ListOfPetsViewModel @Inject constructor(
                     petsUIState.value = UiState(
                         loading = false,
                         data = null,
-                        errors = ListOfPetsErrors(
+                        errors = NewPetErrors(
                             communicationError = R.string.no_internet_connection
                         )
                     )
                 is CommunicationResult.Error ->
-                    petsUIState.value = UiState(
-                        loading = false,
-                        data = null,
-                        errors = ListOfPetsErrors(
-                            communicationError = R.string.failed_to_load_the_list
-                        )
-                    )
+                    createResult.value = false
+//                    petsUIState.value = UiState(
+//                        loading = false,
+//                        data = null,
+//                        errors = PetDetailErrors(
+//                            communicationError = R.string.failed_to_delete_pet
+//                        )
+//                    )
                 is CommunicationResult.Exception ->
                     petsUIState.value = UiState(
                         loading = false,
                         data = null,
-                        errors = ListOfPetsErrors(
+                        errors = NewPetErrors(
                             communicationError = R.string.unknown_error
                         )
                     )
                 is CommunicationResult.Success ->
-                    petsUIState.value = UiState(
-                        loading = false,
-                        data = result.data.reversed(),
-                        errors = null
-                    )
+                    createResult.value = true
             }
         }
     }
+
 }
