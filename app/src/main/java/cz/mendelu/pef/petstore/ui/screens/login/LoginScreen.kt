@@ -52,14 +52,13 @@ fun LoginScreen(
         placeholderScreenContent = null
     ) {
         if (viewModel.loginSuccessful.value == false) {
-            LoginScreenContent(paddingValues = it, viewModel = viewModel, uiState = uiState.value)
+            LoginScreenContent(viewModel = viewModel, uiState = uiState.value)
         }
     }
 }
 
 @Composable
 fun LoginScreenContent(
-    paddingValues: PaddingValues,
     viewModel: LoginScreenViewModel,
     uiState: UiState<Nothing, LoginErrors>
 ){
@@ -68,10 +67,7 @@ fun LoginScreenContent(
     var password by rememberSaveable { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .padding(paddingValues)
-            .padding(all = basicMargin()
-        ),
+        modifier = Modifier.padding(all = basicMargin()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
