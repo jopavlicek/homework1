@@ -1,0 +1,41 @@
+[33mcommit 618c60eadbfaf22073dedbb2128508adc0ab2756[m[33m ([m[1;36mHEAD -> [m[1;32mactualproject[m[33m)[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Wed Oct 25 14:45:42 2023 +0200
+
+    Finished CRUD functionality
+
+[33mcommit 1e300e50ab75fd4a4ddf122ee771efc8da27a890[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Wed Oct 25 01:53:17 2023 +0200
+
+    New pet feature
+
+[33mcommit 984995fd29fefb7ad4f32018341d5c7f93e692f2[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Wed Oct 25 00:26:10 2023 +0200
+
+    Delete pet feature
+
+[33mcommit 66bbfdcc84921fe5dba5630a614f608ffa20c779[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Tue Oct 24 22:50:14 2023 +0200
+
+    List and detail base
+
+[33mcommit 183e4bebf3828f76eb5d31a9837c6ae11fbd0232[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Mon Oct 23 22:00:22 2023 +0200
+
+    lecture 3 - finished pet list endpoint
+
+[33mcommit 85410715cab932ede6cbd80a896d5136233bf075[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Mon Oct 23 21:51:17 2023 +0200
+
+    lecture 2 - communication and list of pets
+
+[33mcommit a5e97c40a4270995e54667d1f624ff66c80913ec[m
+Author: Josef Pavlíček <xpavlic6@mendelu.cz>
+Date:   Mon Oct 23 21:36:37 2023 +0200
+
+    lecture 1 - app template

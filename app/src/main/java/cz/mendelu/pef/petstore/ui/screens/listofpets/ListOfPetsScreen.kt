@@ -1,5 +1,6 @@
 package cz.mendelu.pef.petstore.ui.screens.listofpets
 
+import android.app.AlertDialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Pets
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Card
@@ -35,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.style.TextOverflow
@@ -54,13 +57,15 @@ import cz.mendelu.pef.petstore.model.UiState
 import cz.mendelu.pef.petstore.ui.elements.BaseScreen
 import cz.mendelu.pef.petstore.ui.elements.PlaceHolderScreen
 import cz.mendelu.pef.petstore.ui.elements.PlaceholderScreenContent
+import cz.mendelu.pef.petstore.ui.screens.destinations.ListOfPetsScreenDestination
+import cz.mendelu.pef.petstore.ui.screens.destinations.LoginScreenDestination
 import cz.mendelu.pef.petstore.ui.screens.destinations.NewPetScreenDestination
 import cz.mendelu.pef.petstore.ui.screens.destinations.PetDetailScreenDestination
 import cz.mendelu.pef.petstore.ui.theme.basicMargin
 import cz.mendelu.pef.petstore.ui.theme.halfMargin
 import cz.mendelu.pef.petstore.ui.theme.smallMargin
 
-@Destination(start = true)
+@Destination
 @Composable
 fun ListOfPetsScreen(
     navigator: DestinationsNavigator,
@@ -73,6 +78,13 @@ fun ListOfPetsScreen(
 
     viewModel.petsUIState.value.let {
         uiState.value = it
+    }
+
+    viewModel.logoutSuccess.value.let {
+        if (it) {
+            navigator.popBackStack()
+            navigator.navigate(LoginScreenDestination)
+        }
     }
 
     // refresh list after delete action on pet detail screen
@@ -118,6 +130,26 @@ fun ListOfPetsScreen(
                 },
             ) {
                 Icon(Icons.Filled.Refresh, null)
+            }
+
+            val builder: AlertDialog.Builder = AlertDialog.Builder(LocalContext.current)
+            builder
+                .setMessage("Are you sure you want to sign out?")
+                .setTitle("Sign out?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    viewModel.logout()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.cancel()
+                }
+
+            IconButton(
+                onClick = {
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
+                },
+            ) {
+                Icon(Icons.Filled.Logout, null)
             }
         }
     ) {

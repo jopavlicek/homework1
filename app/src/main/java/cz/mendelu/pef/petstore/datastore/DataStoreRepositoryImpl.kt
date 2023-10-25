@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.first
 
 class DataStoreRepositoryImpl(private val context: Context) : IDataStoreRepository {
 
-    override suspend fun setLoginSuccessful() {
+    override suspend fun setLoginSuccessful(value: Boolean) {
         val preferencesKey = booleanPreferencesKey(DataStoreConstants.LOGIN_SUCCESSFUL)
         context.dataStore.edit { preferences ->
-            preferences[preferencesKey] = false
+            preferences[preferencesKey] = value
         }
     }
 
@@ -20,12 +20,12 @@ class DataStoreRepositoryImpl(private val context: Context) : IDataStoreReposito
             val preferencesKey = booleanPreferencesKey(DataStoreConstants.LOGIN_SUCCESSFUL)
             val preferences = context.dataStore.data.first()
             if (!preferences.contains(preferencesKey))
-                true
+                false // true
             else
                 preferences[preferencesKey]!!
         } catch (e: Exception) {
             e.printStackTrace()
-            true
+            false // true
         }
     }
 }

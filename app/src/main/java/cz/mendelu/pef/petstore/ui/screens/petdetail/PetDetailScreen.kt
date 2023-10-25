@@ -1,5 +1,6 @@
 package cz.mendelu.pef.petstore.ui.screens.petdetail
 
+import android.app.AlertDialog
 import android.widget.Toast
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
@@ -96,10 +97,22 @@ fun PetDetailScreen(
             navigator.popBackStack()
         },
         actions = {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(LocalContext.current)
+            builder
+                .setMessage("Are you sure you want to delete this pet?")
+                .setTitle("Delete?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    viewModel.deletePet(id = id)
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.cancel()
+                }
+
             IconButton(
                 enabled = !uiState.value.loading && uiState.value.errors == null,
                 onClick = {
-                    viewModel.deletePet(id = id)
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
                 },
             ) {
                 Icon(Icons.Filled.DeleteOutline, null)

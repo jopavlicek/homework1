@@ -7,6 +7,7 @@ import cz.mendelu.pef.petstore.R
 import cz.mendelu.pef.petstore.architecture.BaseViewModel
 import cz.mendelu.pef.petstore.architecture.CommunicationResult
 import cz.mendelu.pef.petstore.communication.pets.PetsRemoteRepositoryImpl
+import cz.mendelu.pef.petstore.datastore.DataStoreRepositoryImpl
 import cz.mendelu.pef.petstore.model.Pet
 import cz.mendelu.pef.petstore.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ListOfPetsViewModel @Inject constructor(
     private val petsRemoteRepositoryImpl: PetsRemoteRepositoryImpl,
+    private val dataStoreRepositoryImpl: DataStoreRepositoryImpl
 ) : BaseViewModel()
 {
     init {
@@ -27,9 +29,18 @@ class ListOfPetsViewModel @Inject constructor(
     val petsUIState: MutableState<UiState<List<Pet>, ListOfPetsErrors>>
             = mutableStateOf(UiState())
 
+    val logoutSuccess: MutableState<Boolean> = mutableStateOf(false)
+
     fun refreshList() {
         petsUIState.value = UiState()
         loadPets()
+    }
+
+    fun logout() {
+        launch {
+            dataStoreRepositoryImpl.setLoginSuccessful(false)
+            logoutSuccess.value = true
+        }
     }
 
     private fun loadPets() {
