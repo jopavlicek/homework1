@@ -27,7 +27,7 @@ class NewPetViewModel @Inject constructor(
 
     val createResult: MutableState<Boolean?> = mutableStateOf(null)
 
-    fun createPet(name: String) {
+    fun createPet(name: String, photoUrl: String) {
         launch {
             petsUIState.value = UiState()
 
@@ -36,7 +36,7 @@ class NewPetViewModel @Inject constructor(
                 name = name,
                 status = "available",
                 category = null,
-                photoUrls = null,
+                photoUrls = if (photoUrl.isBlank()) null else listOf(photoUrl),
                 tags = null,
             )
 

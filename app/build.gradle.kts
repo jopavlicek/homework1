@@ -77,21 +77,18 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.1.0-alpha04")
 
 
-
-    // Hilt
+    // Hilt - Dependency injection
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    // Retrofit
+    // Retrofit - REST API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
-
-    // Moshi for json converter
+    // Moshi - JSON converter
     implementation("com.squareup.moshi:moshi:1.14.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
-
 
     // Navigation
     implementation("io.github.raamcosta.compose-destinations:animations-core:1.8.42-beta")
@@ -100,6 +97,9 @@ dependencies {
     // DataStore
     implementation("androidx.datastore:datastore-core:1.0.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Coil - Async images
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
 }
 

@@ -18,6 +18,9 @@ val DarkBackground = Color(0xFF000000)
 val LightTextColor = Color(0xFF000000)
 val DarkTextColor = Color(0xFFFFFFFF)
 
+//val DarkCardBackground = Color(0xFF1D1D1D)
+//val LightCardBackground = Color(0xFF1D1D1D)
+
 @Composable
 fun getBackgroundColor() = if (isSystemInDarkTheme()) DarkBackground else LightBackground
 
@@ -26,4 +29,7 @@ fun basicTextColor(): Color = if (isSystemInDarkTheme()) DarkTextColor else Ligh
 
 @Composable
 fun getTintColor() = if (isSystemInDarkTheme()) Color.White else Color.Black
+
+//@Composable
+//fun getCardColor() = if (isSystemInDarkTheme()) DarkCardBackground else LightCardBackground
 

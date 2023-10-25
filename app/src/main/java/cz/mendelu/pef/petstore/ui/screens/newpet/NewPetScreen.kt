@@ -45,13 +45,11 @@ fun NewPetScreen(
     viewModel.createResult.value.let {
         if (it == true) {
             resultNavigator.navigateBack(result = true)
-            // navigator.popBackStack()
             Toast.makeText(
-                LocalContext.current, stringResource(id = R.string.pet_create_ok), Toast.LENGTH_LONG
+                LocalContext.current, stringResource(id = R.string.pet_create_ok), Toast.LENGTH_SHORT
             ).show()
         } else if (it == false) {
             resultNavigator.navigateBack(result = true)
-            // navigator.popBackStack()
             Toast.makeText(
                 LocalContext.current, stringResource(id = R.string.pet_create_fail), Toast.LENGTH_LONG
             ).show()
@@ -59,7 +57,7 @@ fun NewPetScreen(
     }
 
     BaseScreen(
-        topBarText = "New Pet",
+        topBarText = "Add Pet",
         drawFullScreenContent = true,
         onBackClick = {
             navigator.popBackStack()
@@ -77,13 +75,12 @@ fun NewPetScreenContent(
 ) {
 
     var name by rememberSaveable { mutableStateOf("") }
+    var photoUrl by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .padding(paddingValues)
             .padding(all = basicMargin()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween,
     ) {
         TextInputField(
             value = name,
@@ -92,9 +89,16 @@ fun NewPetScreenContent(
             errorMessage = null
         )
 
+        TextInputField(
+            value = photoUrl,
+            hint = stringResource(R.string.photo_url),
+            onValueChange = { photoUrl = it },
+            errorMessage = null
+        )
+
         RoundButton(
             text = stringResource(R.string.save_pet),
-            onClick = { viewModel.createPet(name) },
+            onClick = { viewModel.createPet(name, photoUrl) },
             backgroundColor = MaterialTheme.colorScheme.primary,
             enabled = name.isNotBlank()
         )
