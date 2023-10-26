@@ -2,7 +2,6 @@ package cz.mendelu.pef.petstore.ui.screens.listofpets
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import cz.mendelu.pef.petstore.R
 import cz.mendelu.pef.petstore.architecture.BaseViewModel
 import cz.mendelu.pef.petstore.architecture.CommunicationResult

@@ -1,18 +1,14 @@
 package cz.mendelu.pef.petstore.ui.screens.login
 
-import android.util.Log
 import android.util.Patterns
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import cz.mendelu.pef.petstore.R
 import cz.mendelu.pef.petstore.architecture.BaseViewModel
 import cz.mendelu.pef.petstore.architecture.CommunicationResult
-import cz.mendelu.pef.petstore.communication.pets.PetsRemoteRepositoryImpl
 import cz.mendelu.pef.petstore.communication.user.UsersRemoteRepositoryImpl
 import cz.mendelu.pef.petstore.datastore.DataStoreRepositoryImpl
-import cz.mendelu.pef.petstore.model.Pet
 import cz.mendelu.pef.petstore.model.UiState
-import cz.mendelu.pef.petstore.ui.screens.listofpets.ListOfPetsErrors
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

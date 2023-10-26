@@ -2,21 +2,16 @@ package cz.mendelu.pef.petstore.ui.screens.petdetail
 
 import android.app.AlertDialog
 import android.widget.Toast
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteOutline
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,12 +22,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
@@ -46,13 +39,8 @@ import cz.mendelu.pef.petstore.model.UiState
 import cz.mendelu.pef.petstore.ui.elements.BaseScreen
 import cz.mendelu.pef.petstore.ui.elements.PlaceHolderScreen
 import cz.mendelu.pef.petstore.ui.elements.PlaceholderScreenContent
-import cz.mendelu.pef.petstore.ui.screens.listofpets.ListOfPetsErrors
-import cz.mendelu.pef.petstore.ui.screens.listofpets.ListOfPetsScreenContent
-import cz.mendelu.pef.petstore.ui.screens.listofpets.ListOfPetsViewModel
-import cz.mendelu.pef.petstore.ui.screens.listofpets.PetImagePlaceholder
 import cz.mendelu.pef.petstore.ui.theme.basicMargin
 import cz.mendelu.pef.petstore.ui.theme.basicTextColor
-import cz.mendelu.pef.petstore.ui.theme.halfMargin
 import cz.mendelu.pef.petstore.ui.theme.smallMargin
 
 @Destination
@@ -161,8 +149,8 @@ fun PetDetailScreenContent(
                 color = basicTextColor(),
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(top = smallMargin()),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                 maxLines = 3,
+                 overflow = TextOverflow.Ellipsis
             )
 
             val photoAvailable: Boolean

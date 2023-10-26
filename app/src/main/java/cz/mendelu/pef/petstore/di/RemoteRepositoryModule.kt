@@ -1,7 +1,6 @@
 package cz.mendelu.pef.petstore.di
 
 import android.content.Context
-import androidx.compose.ui.platform.LocalContext
 import cz.mendelu.pef.petstore.communication.pets.PetsAPI
 import cz.mendelu.pef.petstore.communication.pets.PetsRemoteRepositoryImpl
 import cz.mendelu.pef.petstore.communication.user.UsersAPI
@@ -12,7 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module

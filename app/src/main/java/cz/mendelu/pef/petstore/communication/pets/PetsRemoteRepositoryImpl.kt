@@ -1,7 +1,6 @@
 package cz.mendelu.pef.petstore.communication.pets
 
 import cz.mendelu.pef.petstore.architecture.CommunicationResult
-import cz.mendelu.pef.petstore.architecture.Error
 import cz.mendelu.pef.petstore.model.ApiResponse
 import cz.mendelu.pef.petstore.model.Pet
 import kotlinx.coroutines.Dispatchers

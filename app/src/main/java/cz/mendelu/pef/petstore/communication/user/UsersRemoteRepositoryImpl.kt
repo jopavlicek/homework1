@@ -1,8 +1,6 @@
 package cz.mendelu.pef.petstore.communication.user
 
 import cz.mendelu.pef.petstore.architecture.CommunicationResult
-import cz.mendelu.pef.petstore.communication.pets.IPetsRemoteRepository
-import cz.mendelu.pef.petstore.communication.pets.PetsAPI
 import cz.mendelu.pef.petstore.model.ApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

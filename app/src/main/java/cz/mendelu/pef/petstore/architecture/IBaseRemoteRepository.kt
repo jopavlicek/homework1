@@ -1,8 +1,6 @@
 package cz.mendelu.pef.petstore.architecture
 
 import com.squareup.moshi.JsonDataException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

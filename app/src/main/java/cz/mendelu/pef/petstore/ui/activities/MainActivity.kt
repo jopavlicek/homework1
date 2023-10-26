@@ -3,7 +3,6 @@ package cz.mendelu.pef.petstore.ui.activities
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Text
 import com.ramcosta.composedestinations.DestinationsNavHost
 import cz.mendelu.pef.petstore.ui.screens.NavGraphs
 import cz.mendelu.pef.petstore.ui.theme.PetStoreTheme
